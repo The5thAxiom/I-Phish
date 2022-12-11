@@ -1,5 +1,5 @@
 # I-Phish
-
+AI based detection of Phishing URL. Chrome Extension product. More changes soon...
 ## Dev setup
 
 -   setup venv: `python -m venv venv`
