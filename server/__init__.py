@@ -3,7 +3,7 @@ from model import run_model
 
 app = Flask(__name__)
 
-@app.route('/validate', methods=['GET', 'POST'])
+@app.route('/validate', methods=['POST'])
 def validate():
     url = request.json.get("url", None)
     if url is not None:
