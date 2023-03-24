@@ -28,7 +28,13 @@ async function validateURL(url) {
 }
 
 function cleanLink(href) {
-    return href;
+    let url;
+    try {
+        url = new URL(href);
+    } catch (e) {
+        url = new URL(href, document.baseURI);
+    }
+    return url.href;
 }
 
 function styleTag(tag, hasError, isValid) {
