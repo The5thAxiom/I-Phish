@@ -5,11 +5,32 @@ type Link {
     tag: HtmlELement;
     href: string;
     hasError: boolean;
-    isValid: boolean;
+    isBenign: boolean;
 };
 */
 
+function saveToCache(url, hasError, isBenign) {
+    const alreadyInCache = localStorage.getItem(url);
+    if (!alreadyInCache)
+        localStorage.setItem(url, JSON.stringify({ hasError, isBenign }));
+}
+
+function checkCache(url) {
+    const cachedValue = JSON.parse(localStorage.getItem(url));
+    console.log(!!cachedValue);
+    console.log(cachedValue);
+    if (cachedValue) return { inCache: true, result: cachedValue };
+    else return { inCache: false, result: null };
+}
+
 async function validateURL(url) {
+    const { inCache, result } = checkCache(url);
+    if (inCache) {
+        console.log('cache hit!');
+        return result;
+    }
+    console.log(':( cache miss');
+
     const apiURL = 'http://127.0.0.1:8000';
     const resp = await fetch(apiURL + '/is-valid-url', {
         method: 'POST',
@@ -17,14 +38,15 @@ async function validateURL(url) {
         headers: { 'Content-Type': 'application/json' }
     });
     let hasError = false;
-    let isValid = false;
+    let isBenign = false;
     if (!resp.ok) hasError = true;
     else {
         const data = await resp.json();
         if (data.msg !== 'OK') alert(`${url}: ${data.msg}`);
-        isValid = data.ans;
+        isBenign = data.ans;
     }
-    return { hasError, isValid };
+    saveToCache(url, hasError, isBenign);
+    return { hasError, isBenign };
 }
 
 // converting any relative URLs to absolute URLs
@@ -55,7 +77,7 @@ async function main() {
     // now, for each link:
     links.forEach(async ({ tag, href }) => {
         // we validate the URL as being benign or malicious from the API
-        const { hasError, isValid: isBenign } = await validateURL(href);
+        const { hasError, isBenign } = await validateURL(href);
 
         // we remove the loading state from each link
         tag.classList.remove('iphish-loading');
