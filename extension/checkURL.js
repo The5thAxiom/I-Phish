@@ -21,6 +21,7 @@ async function validateURL(url) {
     if (!resp.ok) hasError = true;
     else {
         const data = await resp.json();
+        if (data.msg !== 'OK') alert(`${url}: ${data.msg}`);
         isValid = data.ans;
     }
     return { hasError, isValid };

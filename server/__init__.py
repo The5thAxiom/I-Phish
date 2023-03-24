@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-from model import run_model
+from model import predict
 
 app = Flask(__name__)
 CORS(app)
@@ -9,9 +9,9 @@ CORS(app)
 def validate():
     url = request.json.get("url", None)
     if url is not None:
-        ans = run_model(url)
+        ans, msg = predict(url)
         return jsonify({
-            'msg': 'OK',
+            'msg': msg,
             'ans': ans
         })
     else:
@@ -29,7 +29,7 @@ def validate_list():
 
     if multiple_urls or single_url:
         try:
-            ans = {url: run_model(url) for url in urls} if multiple_urls else run_model(url)
+            ans = {url: predict(url) for url in urls} if multiple_urls else predict(url)
             return jsonify({
                 'msg': 'OK',
                 'ans': ans
