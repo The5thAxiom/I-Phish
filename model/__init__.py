@@ -18,10 +18,11 @@ def predict(url: str) -> bool:
     if type(url) is str:
         # resolving the url:
         # this will get us the actual URL and not just the redirect
-        try:
-            final_url = resolve_url(url)
-        except:
-            return False, "could not resolve URL"
+        # try:
+        #     final_url = resolve_url(url)
+        # except:
+        #     return False, "could not resolve URL"
+        final_url = url
         
         # feature engineering:
         # here, we convert the raw URL into a DataFrame, containing the features we need
