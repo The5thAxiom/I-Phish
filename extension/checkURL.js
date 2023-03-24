@@ -9,46 +9,52 @@ type Link {
 };
 */
 
-async function validateURLS(links) {
-    // links: Link[]
-
-    // sleep for 2 sec
-    await new Promise(r => setTimeout(r, 2000));
-    return links.map(tagData => ({
-        ...tagData,
-        hasError: Math.random() < 0.3,
-        isValid: Math.random() < 0.5
-    }));
+async function validateURL(url) {
+    const apiURL = 'http://127.0.0.1:8000';
+    const resp = await fetch(apiURL + '/is-valid-url', {
+        method: 'POST',
+        body: JSON.stringify({ url }),
+        headers: { 'Content-Type': 'application/json' }
+    });
+    let hasError = false;
+    let isValid = false;
+    if (!resp.ok) hasError = true;
+    else {
+        const data = await resp.json();
+        isValid = data.ans;
+    }
+    return { hasError, isValid };
 }
 
-function cleanLink({ tag, href }) {
-    return { tag, href: href && cleanLink(href) };
+function cleanLink(href) {
+    return href;
 }
 
-function styleTag({ tag, hasError, isValid }) {
+function styleTag(tag, hasError, isValid) {
     tag.style.color = hasError ? 'gray' : isValid ? 'green' : 'red';
     tag.style.cursor = hasError ? 'help' : isValid ? 'pointer' : 'not-allowed';
-    tag.style.textDecoration = hasError
-        ? 'underline'
+    tag.style.textDecoration = 'underline';
+    tag.style.textDecorationStyle = hasError
+        ? 'dashed'
         : isValid
-        ? 'none'
-        : 'underline';
-    tag.style.textDecorationStyle = hasError ? 'dashed' : isValid ? '' : 'wavy';
+        ? 'solid'
+        : 'wavy';
 }
 
 async function main() {
-    const links = tags('a')
-        .map(tag => ({
-            tag: tag,
-            href: tag.getAttribute('href')
-        }))
-        .map(cleanLink);
+    const links = tags('a').map(tag => ({
+        tag,
+        href: cleanLink(tag.getAttribute('href'))
+    }));
+
     links.forEach(({ tag }) => {
-        tag.style.color = 'gray';
         tag.style.cursor = 'wait';
     });
-    const validatedLinks = await validateURLS(links);
-    validatedLinks.forEach(styleTag);
+
+    links.forEach(async ({ tag, href }) => {
+        const { hasError, isValid } = await validateURL(href);
+        styleTag(tag, hasError, isValid);
+    });
 }
 
 main();
