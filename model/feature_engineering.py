@@ -132,7 +132,6 @@ def extract_features(url):
     return [html_tags, hyperlinks, iframes, evals, escapes, links, underscapes, execs, searches, exception_handling]
 
 def feature_engineer(url: str):
-    url = add_scheme(url)
     urlData = pd.DataFrame()
 
     urlData.loc[0, 'numberDots'] = url.count('.')
