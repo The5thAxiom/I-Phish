@@ -140,7 +140,7 @@ def feature_engineer(url: str):
     urlData.loc[0, 'numberDigits'] = len(findall(r'/\d/', url))
     urlData.loc[0, 'urlLen'] = len(url)
     urlData.loc[0, 'hostNameLen'] = len(getHostname(url))
-    urlData.loc[0, 'pathLen'] = getPathLength(url)
+    urlData.loc[0, 'pathLen'] = len(str(urlparse(url).path))
     urlData.loc[0, 'numberBackSlash'] = url.count('/')
     urlData.loc[0, 'hasHttps'] = 1 if 'https' in url else 0
     urlData.loc[0, 'portN'] = getPortN(url)
