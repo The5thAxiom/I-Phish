@@ -1,13 +1,17 @@
 from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from model import predict
+import pandas as pd
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/demo', methods=['GET'])
 def demo():
-    return render_template('demo.html')
+    phishtankUrls = pd.read_csv('server/correct.csv')
+    random_20 = phishtankUrls.sample(20)
+
+    return render_template('demo.html', urls = random_20)
 
 @app.route('/is-valid-url', methods=['POST'])
 def validate():

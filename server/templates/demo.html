@@ -1,30 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<a href="https://www.zapper-defi.com	">phishing links</a>
-<a href="https://www.polkastartcr.online">phishing links</a>
-<a href="https://magamaisfat.com/">phishing links</a>
-<a href="https://gxnkllbtirsgvmnt.com/r/AX522Z2">phishing links</a>
-<a href="https://tlcbrc.one/">phishing links</a>
-<a href="https://kumionxlgiomn.godaddysites.com/">phishing links</a>
-<a href="https://bokaudio.com/Postoffice/logininfo.php">phishing links</a>
-<a href="https://ko.gl/PWYuZ">phishing links</a>
-<a href="https://accounts.binance.com/ru/register?ref=17461">phishing links</a>
-<a href="https://crypto-drops.top/shiba/?prt=c">phishing links</a>
-<a href="https://staging.banqi.negociacao.paiper.com.br/">phishing links</a>
-<a href="https://sicrediavoce.com/100075921198433/posts/pfb">phishing links</a>
-<a href="https://caixa.auto-atendimento.site">phishing links</a>
-<a href="https://www.nusuporte.com/inicio.php?chatbot=nT8Q6">phishing links</a>
-<a href="https://parceiroexpress.shop/panelas/">phishing links</a>
-<a href="https://rb.gy/dhl4to">shortened link</a>
-<a href="https://rb.gy/3uy6mt">shortened link</a>
-<a href="https://rb.gy/lw5hsi">shortened link</a>
-<a href="https://rb.gy/9n4cyc">shortened link</a>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        {% for _, row in urls.iterrows() %}
+        <a href="{{row['url']}}">{{row['url']}} is {{row['label']}}</a><br />
+        {% endfor %}
+    </body>
 </html>
+
