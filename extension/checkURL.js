@@ -24,19 +24,24 @@ async function validateURL(url) {
     const { inCache, result } = checkCache(url);
     if (inCache) return result;
 
-    const apiURL = 'http://127.0.0.1:8000';
-    const resp = await fetch(apiURL + '/is-valid-url', {
-        method: 'POST',
-        body: JSON.stringify({ url }),
-        headers: { 'Content-Type': 'application/json' }
-    });
-    let hasError = false;
-    let isBenign = false;
-    if (!resp.ok) hasError = true;
-    else {
-        const data = await resp.json();
-        if (data.msg !== 'OK') alert(`${url}: ${data.msg}`);
-        isBenign = data.isBenign;
+    if (!url.startswith('https')) {
+        const apiURL = 'http://127.0.0.1:8000';
+        const resp = await fetch(apiURL + '/is-valid-url', {
+            method: 'POST',
+            body: JSON.stringify({ url }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        let hasError = false;
+        let isBenign = false;
+        if (!resp.ok) hasError = true;
+        else {
+            const data = await resp.json();
+            if (data.msg !== 'OK') alert(`${url}: ${data.msg}`);
+            isBenign = data.isBenign;
+        }
+    } else {
+        const hasError = false;
+        const isBenign = true;
     }
     saveToCache(url, hasError, isBenign);
     return { hasError, isBenign };
