@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "I-Phish",
+    "description": "An AI-based solution to mitigate phishing attacks",
+    "version": "1.0",
+    "author": "Phish Catchers",
+    "action": {
+        "default_popup": "iphish.html",
+        "default_icon": "icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["checkURL.js"]
+        }
+    ]
+}
