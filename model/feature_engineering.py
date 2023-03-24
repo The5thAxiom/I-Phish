@@ -142,9 +142,9 @@ def feature_engineer(url: str):
     urlData.loc[0, 'hostNameLen'] = len(getHostname(url))
     urlData.loc[0, 'pathLen'] = getPathLength(url)
     urlData.loc[0, 'numberBackSlash'] = url.count('/')
-    urlData.loc[0, 'portN'] = getPortN(url)
     urlData.loc[0, 'hasHttps'] = 1 if 'https' in url else 0
-    urlData.loc[0, 'hasSuspiciousSymbol'] = hasSuspiciousSymbol(url)
+    urlData.loc[0, 'portN'] = getPortN(url)
+    # urlData.loc[0, 'hasSuspiciousSymbol'] = hasSuspiciousSymbol(url)
 
     # search_webpage_features(url, urlData)
 

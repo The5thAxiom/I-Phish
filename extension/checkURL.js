@@ -36,7 +36,7 @@ async function validateURL(url) {
     else {
         const data = await resp.json();
         if (data.msg !== 'OK') alert(`${url}: ${data.msg}`);
-        isBenign = data.ans;
+        isBenign = data.isBenign;
     }
     saveToCache(url, hasError, isBenign);
     return { hasError, isBenign };

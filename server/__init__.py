@@ -12,7 +12,7 @@ def validate():
         ans, msg = predict(url)
         return jsonify({
             'msg': msg,
-            'ans': ans
+            'isBenign': ans
         })
     else:
         return jsonify({
@@ -32,7 +32,7 @@ def validate_list():
             ans = {url: predict(url) for url in urls} if multiple_urls else predict(url)
             return jsonify({
                 'msg': 'OK',
-                'ans': ans
+                'isBenign': ans
             })
         except TypeError:
             msg = "'urls' should be a list of strings" if multiple_urls else 'url should be a string'
