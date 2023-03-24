@@ -28,7 +28,12 @@ function cleanLink({ tag, href }) {
 function styleTag({ tag, hasError, isValid }) {
     tag.style.color = hasError ? 'gray' : isValid ? 'green' : 'red';
     tag.style.cursor = hasError ? 'help' : isValid ? 'pointer' : 'not-allowed';
-    console.log(tag.style.color);
+    tag.style.textDecoration = hasError
+        ? 'underline'
+        : isValid
+        ? 'none'
+        : 'underline';
+    tag.style.textDecorationStyle = hasError ? 'dashed' : isValid ? '' : 'wavy';
 }
 
 async function main() {
