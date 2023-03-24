@@ -17,19 +17,12 @@ function saveToCache(url, hasError, isBenign) {
 
 function checkCache(url) {
     const cachedValue = JSON.parse(localStorage.getItem(url));
-    console.log(!!cachedValue);
-    console.log(cachedValue);
-    if (cachedValue) return { inCache: true, result: cachedValue };
-    else return { inCache: false, result: null };
+    return { inCache: !!cachedValue, result: cachedValue };
 }
 
 async function validateURL(url) {
     const { inCache, result } = checkCache(url);
-    if (inCache) {
-        console.log('cache hit!');
-        return result;
-    }
-    console.log(':( cache miss');
+    if (inCache) return result;
 
     const apiURL = 'http://127.0.0.1:8000';
     const resp = await fetch(apiURL + '/is-valid-url', {
@@ -90,3 +83,4 @@ async function main() {
 }
 
 main();
+
