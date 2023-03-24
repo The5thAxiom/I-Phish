@@ -1,9 +1,13 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 from model import predict
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/demo', methods=['GET'])
+def demo():
+    return render_template('demo.html')
 
 @app.route('/is-valid-url', methods=['POST'])
 def validate():
