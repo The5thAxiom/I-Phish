@@ -11,7 +11,8 @@
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["checkURL.js"]
+            "js": ["checkURL.js"],
+            "css": ["urlStyles.css"]
         }
     ]
 }

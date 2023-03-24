@@ -27,6 +27,7 @@ async function validateURL(url) {
     return { hasError, isValid };
 }
 
+// converting any relative URLs to absolute URLs
 function cleanLink(href) {
     let url;
     try {
@@ -37,30 +38,32 @@ function cleanLink(href) {
     return url.href;
 }
 
-function styleTag(tag, hasError, isValid) {
-    tag.style.color = hasError ? 'gray' : isValid ? 'green' : 'red';
-    tag.style.cursor = hasError ? 'help' : isValid ? 'pointer' : 'not-allowed';
-    tag.style.textDecoration = 'underline';
-    tag.style.textDecorationStyle = hasError
-        ? 'dashed'
-        : isValid
-        ? 'solid'
-        : 'wavy';
-}
-
 async function main() {
     const links = tags('a').map(tag => ({
         tag,
         href: cleanLink(tag.getAttribute('href'))
     }));
 
+    // set each link to be in the 'loading' state
     links.forEach(({ tag }) => {
-        tag.style.cursor = 'wait';
+        tag.classList.remove('iphish-malicious');
+        tag.classList.remove('iphish-benign');
+        tag.classList.remove('iphish-unknown');
+        tag.classList.add('iphish-loading');
     });
 
+    // now, for each link:
     links.forEach(async ({ tag, href }) => {
-        const { hasError, isValid } = await validateURL(href);
-        styleTag(tag, hasError, isValid);
+        // we validate the URL as being benign or malicious from the API
+        const { hasError, isValid: isBenign } = await validateURL(href);
+
+        // we remove the loading state from each link
+        tag.classList.remove('iphish-loading');
+
+        // and add the new state based on the API response
+        if (hasError) tag.classList.add('iphish-unkown');
+        else if (isBenign) tag.classList.add('iphish-benign');
+        else tag.classList.add('iphish-malicious');
     });
 }
 
