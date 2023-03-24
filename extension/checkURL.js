@@ -56,7 +56,7 @@ function cleanLink(href) {
 async function main() {
     const links = tags('a').map(tag => ({
         tag,
-        href: cleanLink(tag.getAttribute('href'))
+        href: tag.getAttribute('href')
     }));
 
     // set each link to be in the 'loading' state
