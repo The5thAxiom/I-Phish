@@ -7,6 +7,9 @@
         <title>Document</title>
     </head>
     <body>
+        <a href="www.google.com">google is good</a><br />
+        <a href="https://www.google.com">google with s is good</a><br />
+        <a href="http://www.google.com">google without s is good</a><br />
         {% for _, row in urls.iterrows() %}
         <a href="{{row['url']}}">{{row['url']}} is {{row['label']}}</a><br />
         {% endfor %}

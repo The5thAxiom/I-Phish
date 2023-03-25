@@ -8,8 +8,8 @@ CORS(app)
 
 @app.route('/demo', methods=['GET'])
 def demo():
-    phishtankUrls = pd.read_csv('server/correct.csv')
-    random_20 = phishtankUrls.sample(20)
+    phishtankUrls = pd.read_csv('server/data.csv')
+    random_20 = phishtankUrls.sample(50)
 
     return render_template('demo.html', urls = random_20)
 

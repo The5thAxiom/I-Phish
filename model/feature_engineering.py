@@ -132,6 +132,8 @@ def extract_features(url):
     return [html_tags, hyperlinks, iframes, evals, escapes, links, underscapes, execs, searches, exception_handling]
 
 def feature_engineer(url: str):
+    url = url[8:] if url.startswith("https://") else url[7:] if  url.startswith("http://") else url
+    url = url[15:] if url.startswith("localhost:8000/") else url
     urlData = pd.DataFrame()
 
     urlData.loc[0, 'numberDots'] = url.count('.')
