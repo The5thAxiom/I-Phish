@@ -1,5 +1,7 @@
 # I-Phish
+
 AI based detection of Phishing URL. Chrome Extension product. More changes soon...
+
 ## Dev setup
 
 -   setup venv: `python -m venv venv`
@@ -10,4 +12,7 @@ AI based detection of Phishing URL. Chrome Extension product. More changes soon.
 
 ## Testing
 
--   `curl`: `curl -X POST http://127.0.0.1:8000/validate -H 'Content-Type: application/json' -d '{"url": "abc"}'`
+-   `curl`:
+    -   single url: `curl -X POST http://127.0.0.1:8000/validate -H 'Content-Type: application/json' -d '{"url":"abc"}'`
+    -   list of urls: `curl -X POST http://127.0.0.1:8000/validate -H 'Content-Type: application/json' -d '{"urls": ["abc", "def", "ghi"]}'`
+

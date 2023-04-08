@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <a href="www.google.com">google is good</a><br />
+        <a href="https://www.google.com">google with s is good</a><br />
+        <a href="http://www.google.com">google without s is good</a><br />
+        {% for _, row in urls.iterrows() %}
+        <a href="{{row['url']}}">{{row['url']}} is {{row['label']}}</a><br />
+        {% endfor %}
+    </body>
+</html>
+

@@ -1,0 +1,23 @@
+a.iphish-loading {
+    text-decoration: dotted !important;
+    color: gray !important;
+    cursor: wait !important;
+}
+
+a.iphish-malicious {
+    text-decoration: underline wavy !important;
+    color: red !important;
+    cursor: not-allowed !important;
+}
+
+a.iphish-benign {
+    text-decoration: underline solid !important;
+    color: green !important;
+    cursor: pointer !important;
+}
+
+a.iphish-unkown {
+    text-decoration: underline dashed !important;
+    color: gray !important;
+    cursor: help !important;
+}
