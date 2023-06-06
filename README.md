@@ -1,6 +1,6 @@
 # I-Phish
 
-AI based detection of Phishing URL. Chrome Extension product. 
+ML based detection of Phishing URL. Chrome Extension product. 
 
 ## Dev setup
 
