@@ -1,4 +1,4 @@
-# I-Phish
+# I-Phish: Phishing Detection using ML and Intuitive Display 
 
 ML based detection of Phishing URL. Chrome Extension product. 
 
